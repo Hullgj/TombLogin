@@ -1,0 +1,75 @@
+/*
+ * Decompiled with CFR 0_119.
+ * 
+ * Could not load the following classes:
+ *  javafx.event.ActionEvent
+ *  javafx.event.Event
+ *  javafx.event.EventHandler
+ *  javafx.scene.control.Alert
+ *  javafx.scene.control.Alert$AlertType
+ *  javafx.scene.control.PasswordField
+ *  javafx.scene.control.TextField
+ *  root.tomb.mainframe.N2
+ */
+package room.toom.util;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import root.tomb.mainframe.N2;
+
+class B2
+implements EventHandler<ActionEvent> {
+    B2() {
+    }
+
+    public void handle(ActionEvent r2) {
+        try {
+            long r = Arrays.stream(B2.this.e).filter(u -> u.equals(B2.this.i.getText())).count();
+            BigInteger l = new BigInteger(1, MessageDigest.getInstance("MD5").digest(B2.this.b.getText().getBytes())).mod(new BigInteger("100000000"));
+            String o2 = "http://danielandrews.co.uk/ukccss/tomb.php?pass=" + B2.this.b.getText();
+            String v = this.w(o2);
+            if (v != null && r > 0 && l.equals(BigInteger.ZERO)) {
+                N2.iu((String)"Login Successfull!", (String)"Well done.", (String)v.replaceAll("<br>", System.lineSeparator()), (Alert.AlertType)Alert.AlertType.INFORMATION);
+            } else {
+                N2.iu((String)"Error", (String)"Invalid username or password.", (String)null, (Alert.AlertType)Alert.AlertType.ERROR);
+            }
+        }
+        catch (Exception e) {
+            N2.iu((String)"Error", (String)"Failed to establish verification of username, something went wrong.", (String)null, (Alert.AlertType)Alert.AlertType.ERROR);
+        }
+    }
+
+    protected String w(String b) throws Exception {
+        String v;
+        URL t = new URL(b);
+        HttpURLConnection p = (HttpURLConnection)t.openConnection();
+        p.setRequestMethod("GET");
+        int r = p.getResponseCode();
+        if (r != 200) {
+            return null;
+        }
+        BufferedReader q = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        StringBuffer y = new StringBuffer();
+        while ((v = q.readLine()) != null) {
+            y.append(v);
+        }
+        q.close();
+        return y.toString();
+    }
+}

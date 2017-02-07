@@ -1,0 +1,112 @@
+/*
+ * Decompiled with CFR 0_119.
+ * 
+ * Could not load the following classes:
+ *  javafx.animation.KeyFrame
+ *  javafx.animation.KeyValue
+ *  javafx.animation.Timeline
+ *  javafx.collections.ObservableList
+ *  javafx.scene.control.Alert
+ *  javafx.scene.control.Alert$AlertType
+ *  javafx.scene.control.ButtonType
+ *  javafx.scene.control.ContentDisplay
+ *  javafx.scene.control.DialogPane
+ *  javafx.scene.control.Tooltip
+ *  javafx.scene.image.Image
+ *  javafx.scene.image.ImageView
+ *  javafx.scene.shape.Rectangle
+ *  javafx.scene.text.Font
+ *  javafx.scene.text.Text
+ *  javafx.scene.text.TextAlignment
+ *  javafx.util.Duration
+ */
+package root.tomb.mainframe;
+
+import java.lang.reflect.Field;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
+import root.tomb.mainframe.C;
+
+public class N2 {
+    public static Tooltip a(String c, Font a, double t) {
+        Tooltip n = new Tooltip(c);
+        n.setContentDisplay(ContentDisplay.BOTTOM);
+        n.setFont(a);
+        n.setOpacity(0.85);
+        N2.b(n, t);
+        return n;
+    }
+
+    public static void b(Tooltip n, double a) {
+        try {
+            Field v = n.getClass().getDeclaredField("BEHAVIOR");
+            v.setAccessible(true);
+            Object q = v.get((Object)n);
+            Field o = q.getClass().getDeclaredField("activationTimer");
+            o.setAccessible(true);
+            Timeline z = (Timeline)o.get(q);
+            z.getKeyFrames().clear();
+            z.getKeyFrames().add((Object)new KeyFrame(new Duration(a), new KeyValue[0]));
+        }
+        catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
+            C.m.y("Failed to modify ToolTip!");
+            e.printStackTrace();
+        }
+    }
+
+    public static Rectangle vf(String a, int z, int t) {
+        Rectangle u = new Rectangle();
+        u.setStyle(a);
+        u.setX(50.0);
+        u.setY(50.0);
+        u.setWidth((double)z);
+        u.setHeight((double)t);
+        u.setArcWidth(25.0);
+        u.setArcHeight(25.0);
+        return u;
+    }
+
+    public static ImageView createIconImage(Image t, int g, int c) {
+        ImageView i = new ImageView(t);
+        i.setFitHeight((double)c);
+        i.setFitWidth((double)g);
+        i.setPreserveRatio(true);
+        return i;
+    }
+
+    public static Text w(String x, Font m, String o) {
+        Text t = new Text(x);
+        t.setFont(m);
+        t.getStyleClass().add((Object)o);
+        t.setTextAlignment(TextAlignment.CENTER);
+        return t;
+    }
+
+    public static Text nb(String c, String i9) {
+        Text v = new Text(c);
+        v.getStyleClass().add((Object)i9);
+        return v;
+    }
+
+    public static void iu(String w, String v, String b, Alert.AlertType oi) {
+        Alert sd = new Alert(oi, b, new ButtonType[]{ButtonType.OK});
+        sd.setTitle(w);
+        sd.setHeaderText(v);
+        sd.getDialogPane().setMinHeight(Double.NEGATIVE_INFINITY);
+        sd.show();
+    }
+}

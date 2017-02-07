@@ -1,0 +1,145 @@
+/*
+ * Decompiled with CFR 0_119.
+ */
+package root.tomb.mainframe;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public final class C {
+    private static final String a = String.valueOf(System.getProperty("user.dir")) + File.separator + "CodeApp";
+    public static final String y = String.valueOf(a) + File.separator + "Resources";
+    private static final DateFormat o = new SimpleDateFormat("HH:mm:ss.SSS");
+    private boolean p = false;
+    private final String a2;
+    private final File a6;
+    private boolean n7;
+    private BufferedWriter w;
+    public static C m = new C(String.valueOf(a) + File.separator + "logs");
+    private static final String l = "[ERROR] ";
+
+    public C(String q) {
+        this.o("Creating logger...");
+        File b = new File(q);
+        if (!b.exists()) {
+            this.y("Directory '" + b + "' did not exist. Creating it now...");
+            b.mkdirs();
+        }
+        this.a2 = String.valueOf(q) + File.separator + "log_" + new SimpleDateFormat("dd-MM-yy").format(new Date()) + ".txt";
+        this.a6 = new File(this.a2);
+        if (!this.a6.exists()) {
+            try {
+                this.o("Creating new log file: " + this.a2);
+                this.a6.createNewFile();
+            }
+            catch (IOException ioe) {
+                this.y("Logger could not create file to write out to: " + ioe.getMessage());
+                this.n7 = false;
+                return;
+            }
+        } else {
+            this.o("File exists: " + this.a6.getAbsolutePath());
+        }
+        try {
+            this.w = new BufferedWriter(new FileWriter(this.a6, true));
+            this.w.write(" ___________________________________________________________" + System.lineSeparator());
+            this.w.write("|                                                           |" + System.lineSeparator());
+            this.w.write("| - - Start - - - - - - - - - - - - - - - - - - - - - - - - |" + System.lineSeparator());
+            this.w.write("|___________________________________________________________|" + System.lineSeparator());
+            this.w.newLine();
+        }
+        catch (IOException ioe) {
+            this.y("Logger could not open file to write out to: " + ioe.getMessage());
+            this.n7 = false;
+            return;
+        }
+        this.n7 = true;
+    }
+
+    public static boolean w(String dir) {
+        if (m != null) {
+            System.err.println("Can't create new logger, one already exists. Must be closed first.");
+            return false;
+        }
+        m = new C(dir);
+        m.o("Created new logger. '" + m.k() + "'");
+        return true;
+    }
+
+    public static void v() {
+        m.o("Closing logger.");
+        if (m != null && C.m.w != null) {
+            m.o("Closing writer for logger.");
+            try {
+                C.m.w.close();
+            }
+            catch (IOException e) {
+                m.y("Failed to close logger!.");
+                e.printStackTrace();
+            }
+        }
+        if (m != null) {
+            m = null;
+        }
+    }
+
+    public void o(Object obj) {
+        this.qw(obj + System.lineSeparator(), true);
+    }
+
+    public void t() {
+        this.qw(System.lineSeparator(), false);
+    }
+
+    public void vc(Object obj) {
+        this.qw(obj.toString(), false);
+    }
+
+    public void yu(Object obj) {
+        this.qw(obj.toString(), true);
+    }
+
+    public void y(Object obj) {
+        this.qw("[ERROR] " + obj.toString(), true);
+    }
+
+    public boolean we() {
+        return this.p;
+    }
+
+    public void d(boolean print) {
+        this.p = print;
+    }
+
+    public void qw(String sc, boolean t) {
+        if (this.n7) {
+            try {
+                if (t) {
+                    this.w.write(String.format("[%s] %s", o.format(new Date()), sc));
+                } else {
+                    this.w.write(String.format("%s", sc));
+                }
+            }
+            catch (IOException ioe) {
+                this.n7 = false;
+                this.y("Logger could not write to file: " + ioe.getMessage());
+            }
+        }
+        System.out.println(sc);
+    }
+
+    public String j() {
+        return this.a6.getParent();
+    }
+
+    private String k() {
+        return this.a6.getAbsolutePath();
+    }
+}

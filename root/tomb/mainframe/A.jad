@@ -1,0 +1,96 @@
+/*
+ * Decompiled with CFR 0_119.
+ * 
+ * Could not load the following classes:
+ *  javafx.scene.media.Media
+ *  javafx.scene.media.MediaPlayer
+ *  javafx.util.Duration
+ */
+package root.tomb.mainframe;
+
+import java.io.File;
+import java.net.URI;
+import java.util.Map;
+import java.util.TreeMap;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+import root.tomb.mainframe.C;
+
+public class A {
+    public static final A am = new A();
+    private MediaPlayer a;
+    private Map<String, Media> d = new TreeMap<String, Media>();
+    private boolean t = true;
+    private double p;
+    private boolean m;
+
+    private A() {
+        this.d.put("main", new Media(new File(String.valueOf(C.y) + File.separator + "main.mp3").toURI().toString()));
+        this.p = 0.3;
+        this.m = false;
+    }
+
+    public void o(String t) {
+        if (this.d.containsKey(t)) {
+            Media hit = this.d.get(t);
+            this.a(hit);
+        } else {
+            this.a(this.d.get("main"));
+        }
+    }
+
+    private void a(Media hg) {
+        if (this.a != null || !this.t) {
+            return;
+        }
+        this.a = new MediaPlayer(hg);
+        this.a.setVolume(this.p);
+        this.a.play();
+        if (this.m) {
+            this.a.setMute(true);
+        }
+        this.a.setOnEndOfMedia(new Runnable(){
+
+            @Override
+            public void run() {
+                A.this.a.seek(Duration.ZERO);
+            }
+        });
+    }
+
+    public void v() {
+        this.a.pause();
+    }
+
+    public boolean s(String m) {
+        if (m == null || m.equalsIgnoreCase("NA")) {
+            return false;
+        }
+        try {
+            String a = new File(String.valueOf(C.y) + File.separator + m).toURI().toString();
+            Media y = new Media(a);
+            this.d.put(m, y);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean y() {
+        return this.a.isMute();
+    }
+
+    public void q(boolean c) {
+        this.a.setMute(c);
+        this.m = c;
+    }
+
+    public void h(double w) {
+        this.a.setVolume(w);
+        this.p = w;
+    }
+
+}

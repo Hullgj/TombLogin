@@ -1,0 +1,56 @@
+/*
+ * Decompiled with CFR 0_119.
+ * 
+ * Could not load the following classes:
+ *  javafx.scene.text.Font
+ *  javafx.scene.text.FontWeight
+ */
+package root.tomb.mainframe;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+public class D {
+    private static D a;
+    private static final double o = 12.0;
+    private static final double n = 48.0;
+    private final String y;
+    private Map<String, Font> q = new HashMap<String, Font>();
+
+    public D(String e) {
+        this.y = e;
+        this.i();
+        a = this;
+    }
+
+    private void i() {
+        Font.getFamilies().stream().forEach(f -> {
+            Font font = this.q.put(f, Font.font((String)f, (FontWeight)FontWeight.NORMAL, (double)12.0));
+        }
+        );
+        this.q.put("DEFAULT_FONT", Font.font((String)this.y, (FontWeight)FontWeight.NORMAL, (double)12.0));
+        this.q.put("HEADER", Font.font((String)this.y, (FontWeight)FontWeight.NORMAL, (double)48.0));
+        this.q.put("EMPTY_FONT", Font.font((String)this.y, (FontWeight)FontWeight.NORMAL, (double)20.0));
+    }
+
+    public Font e(String key) {
+        Optional<Font> res = this.q.entrySet().stream().filter(k -> ((String)k.getKey()).equals(key)).limit(1).map(k -> (Font)k.getValue()).findFirst();
+        return res.isPresent() ? res.get() : this.e(this.y);
+    }
+
+    public Font a(String r, FontWeight d, int g) {
+        return Font.font((String)r, (FontWeight)d, (double)g);
+    }
+
+    public static D b() {
+        return a;
+    }
+}
