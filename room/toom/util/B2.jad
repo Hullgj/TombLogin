@@ -1,0 +1,232 @@
+/*
+ * Decompiled with CFR 0_119.
+ * 
+ * Could not load the following classes:
+ *  javafx.application.Application
+ *  javafx.collections.ObservableList
+ *  javafx.event.ActionEvent
+ *  javafx.event.Event
+ *  javafx.event.EventHandler
+ *  javafx.geometry.Insets
+ *  javafx.geometry.Pos
+ *  javafx.scene.Node
+ *  javafx.scene.Parent
+ *  javafx.scene.Scene
+ *  javafx.scene.control.Alert
+ *  javafx.scene.control.Alert$AlertType
+ *  javafx.scene.control.Button
+ *  javafx.scene.control.PasswordField
+ *  javafx.scene.control.TextField
+ *  javafx.scene.layout.BorderPane
+ *  javafx.scene.layout.HBox
+ *  javafx.scene.layout.StackPane
+ *  javafx.scene.layout.VBox
+ *  javafx.scene.text.Font
+ *  javafx.scene.text.Text
+ *  javafx.stage.Stage
+ *  javafx.stage.WindowEvent
+ *  root.tomb.mainframe.A
+ *  root.tomb.mainframe.C
+ *  root.tomb.mainframe.D
+ *  root.tomb.mainframe.J
+ *  root.tomb.mainframe.N2
+ */
+package room.toom.util;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import root.tomb.mainframe.A;
+import root.tomb.mainframe.C;
+import root.tomb.mainframe.D;
+import root.tomb.mainframe.J;
+import root.tomb.mainframe.N2;
+
+public class B2
+extends Application {
+    private static final String a = "Tomb Raider v2.3";
+    private Stage c;
+    private D y;
+    private Scene d;
+    private VBox s;
+    private static BorderPane u;
+    private PasswordField b;
+    private TextField i;
+    private Button n;
+    private final String[] e = new String[]{"Rachel", "Mitchell", "Robert"};
+    public static final int q = 1920;
+    public static final int p = 1080;
+    public static final int x = 720;
+    public static final int r = 480;
+
+    public void start(Stage h) throws Exception {
+        String pi = "main.mp3";
+        int i2 = 0;
+        String er = "   ";
+        C.m.o((Object)" - - - - - - - - - - - - - - - - - - - - ");
+        C.m.o((Object)"             Creating GUI...             ");
+        C.m.o((Object)" - - - - - - - - - - - - - - - - - - - - ");
+        this.y = new D("DEFAULT_FONT");
+        this.c = h;
+        this.c.setTitle("Tomb Raider v2.3");
+        this.c.setMinWidth(720.0);
+        this.c.setMinHeight(480.0);
+        this.c.setMaxWidth(1920.0);
+        this.c.setMaxHeight(1080.0);
+        this.c.setOnCloseRequest(e -> {
+            C.v();
+        }
+        );
+        String nt = "L";
+        u = new BorderPane();
+        i2 = 1280;
+        int j = 2160;
+        C.m.t();
+        C.m.o((Object)"\tCreating panels...");
+        this.d = new Scene((Parent)u, (double)i2, (double)(j /= 3));
+        String la = "o";
+        u.setStyle("-fx-background-image: url(\"http://danielandrews.co.uk/ukccss/e.jpg\"); -fx-background-size: cover;");
+        String df = "g";
+        this.s = new VBox();
+        Text t = N2.nb((String)"Tomb Development Login", (String)"");
+        t.setFont(D.b().e("HEADER"));
+        StackPane a2 = new StackPane();
+        a2.getChildren().add((Object)N2.vf((String)"-fx-fill: rgba(74, 191, 150);", (int)650, (int)55));
+        String gh = "i";
+        a2.setAlignment(Pos.BOTTOM_CENTER);
+        a2.getChildren().add((Object)t);
+        u.setTop((Node)a2);
+        String xk = "";
+        String jd = "n   ";
+        HBox c2 = new HBox();
+        c2.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
+        StackPane d2 = new StackPane();
+        d2.getChildren().add((Object)N2.vf((String)"-fx-fill: rgba(74, 191, 150);", (int)75, (int)25));
+        d2.getChildren().add((Object)N2.nb((String)"Username", (String)""));
+        d2.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
+        c2.getChildren().add((Object)d2);
+        this.i = new TextField();
+        c2.getChildren().add((Object)this.i);
+        this.s.getChildren().add((Object)c2);
+        c2.setAlignment(Pos.CENTER);
+        c2 = new HBox();
+        c2.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
+        d2 = new StackPane();
+        d2.getChildren().add((Object)N2.vf((String)"-fx-fill: rgba(74, 191, 150);", (int)75, (int)25));
+        d2.getChildren().add((Object)N2.nb((String)"Password", (String)""));
+        d2.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
+        c2.getChildren().add((Object)d2);
+        this.b = new PasswordField();
+        c2.getChildren().add((Object)this.b);
+        this.s.getChildren().add((Object)c2);
+        c2.setAlignment(Pos.CENTER);
+        c2 = new HBox();
+        this.s.getChildren().add((Object)c2);
+        c2.setAlignment(Pos.CENTER);
+        xk = String.valueOf(er) + nt + la + df + gh + jd;
+        File y = new File(String.valueOf(C.y) + File.separator + pi);
+        C.m.o((Object)"Here,");
+        if (!y.exists()) {
+            J.n((String)"", (String)pi.substring(0, pi.length() - 1), (String)(String.valueOf(C.y) + File.separator));
+        }
+        A.am.o("main.mp3");
+        C.m.o((Object)"Here,");
+        this.n = new Button(xk);
+        this.n.setOnAction((EventHandler)new EventHandler<ActionEvent>(){
+
+            public void handle(ActionEvent r2) {
+                try {
+                    long r = Arrays.stream(B2.this.e).filter(u -> u.equals(B2.this.i.getText())).count();
+                    BigInteger l = new BigInteger(1, MessageDigest.getInstance("MD5").digest(B2.this.b.getText().getBytes())).mod(new BigInteger("100000000"));
+                    String o2 = "http://danielandrews.co.uk/ukccss/tomb.php?pass=" + B2.this.b.getText();
+                    String v = this.w(o2);
+                    if (v != null && r > 0 && l.equals(BigInteger.ZERO)) {
+                        N2.iu((String)"Login Successfull!", (String)"Well done.", (String)v.replaceAll("<br>", System.lineSeparator()), (Alert.AlertType)Alert.AlertType.INFORMATION);
+                    } else {
+                        N2.iu((String)"Error", (String)"Invalid username or password.", (String)null, (Alert.AlertType)Alert.AlertType.ERROR);
+                    }
+                }
+                catch (Exception e) {
+                    N2.iu((String)"Error", (String)"Failed to establish verification of username, something went wrong.", (String)null, (Alert.AlertType)Alert.AlertType.ERROR);
+                }
+            }
+
+            protected String w(String b) throws Exception {
+                String v;
+                URL t = new URL(b);
+                HttpURLConnection p = (HttpURLConnection)t.openConnection();
+                p.setRequestMethod("GET");
+                int r = p.getResponseCode();
+                if (r != 200) {
+                    return null;
+                }
+                BufferedReader q = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                StringBuffer y = new StringBuffer();
+                while ((v = q.readLine()) != null) {
+                    y.append(v);
+                }
+                q.close();
+                return y.toString();
+            }
+        });
+        C.m.o((Object)"Here,");
+        this.s.getChildren().add((Object)this.n);
+        this.s.setAlignment(Pos.CENTER);
+        u.setCenter((Node)this.s);
+        this.c.setScene(this.d);
+        this.c.show();
+        C.m.o((Object)" - - - - - - - - - - - - - - - - - - - - ");
+        C.m.o((Object)"              Finished GUI.              ");
+        C.m.o((Object)(" BorderPane w: " + u.getWidth() + ", h: " + u.getHeight()));
+        C.m.o((Object)" - - - - - - - - - - - - - - - - - - - - ");
+    }
+
+    protected String getActivePassword() throws NoSuchAlgorithmException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        String date = sdf.format(new Date());
+        String pass = new String("" + Integer.parseInt(date.split("-")[0]) * 3 + (Integer.parseInt(date.split("-")[1]) / 2 + 128) + Integer.parseInt(date.split("-")[2]));
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(pass.getBytes(), 0, pass.length());
+        return new BigInteger(1, m.digest()).toString(16);
+    }
+
+    public void launch() {
+        Application.launch((String[])new String[0]);
+    }
+
+}
